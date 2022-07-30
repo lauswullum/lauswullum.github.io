@@ -1,0 +1,23 @@
+project:
+  type: website
+
+website:
+  title: "Laus Wullum"
+  navbar:
+    left:
+      - text: Home
+        href: index.qmd
+      - text: Blog
+        href: blogfront.qmd
+      - text: About
+        href: about.qmd
+    right:
+      - icon: github
+        href: https://github.com/lauswullum
+format:
+  html:
+    theme: litera
+    css: styles.css
+
+
+

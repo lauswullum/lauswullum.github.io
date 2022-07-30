@@ -1,0 +1,17 @@
+---
+title: Laus Wolsing Wullum
+image: profile.png
+about:
+  template: jolla
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/lauswullum
+    - icon: github
+      text: Github
+      href: https://github.com/lauswullum
+---
+
+
+Welcome to my website.  
+This site is made using Quarto from Posit.
