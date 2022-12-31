@@ -1,18 +1,19 @@
 ---
 title: "A normal post"
 date: "2022-07-30"
-jupyter: julia-1.7
+jupyter: julia-1.8
 ---
 
-Some normal data
+The normal post.
 
 ```{julia}
+#| layout-ncol: 2
 using UnicodePlots
-scatterplot(randn(1000), randn(1000), width = 35)
+x1 = randn(1000)
+x2 = randn(1000)
+scatterplot(x1, x2, width = 20, height = 20)
 ```
 
-and 
-
 ```{julia}
-histogram(randn(8000), width = 35, nbins = 50)
+histogram(randn(100_000), nbins=40, height=6)
 ```

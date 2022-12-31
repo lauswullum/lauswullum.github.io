@@ -9,8 +9,6 @@ website:
         href: index.qmd
       - text: Blog
         href: blogfront.qmd
-      - text: About
-        href: about.qmd
     right:
       - icon: github
         href: https://github.com/lauswullum

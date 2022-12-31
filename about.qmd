@@ -6,12 +6,30 @@ about:
   links:
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com/lauswullum
+      href: https://linkedin.com/in/lauswullum
     - icon: github
       text: Github
       href: https://github.com/lauswullum
 ---
 
 
-Welcome to my website.  
-This site is made using Quarto from Posit.
+Welcome to my site!  
+Nothing much to see yet.
+
+## Education
+MSc. Student in statistics at the University of Copenhagen (KU) (September 2021 -
+now)  
+  
+
+BSc. in Mathematics with electives in statistics and CS from KU. (2018 - 2021)
+
+## Work
+Statistician at 
+<a href="https://omicron.dk/">Omicron Aps</a> (June 2022 - now)
+
+## Interests
+Statistical modelling, Bayesian statistics, Julia, R
+
+## Mail
+laus (dot) w @ hotmail (dot) com
+
