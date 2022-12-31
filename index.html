@@ -28,7 +28,6 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
@@ -78,9 +77,6 @@ ul.task-list{list-style: none;}
   <li class="nav-item">
     <a class="nav-link" href="./blogfront.html">Blog</a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html">About</a>
-  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -100,47 +96,51 @@ ul.task-list{list-style: none;}
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-about-jolla">
+  <img src="profile.png" class="about-image
+  round " style="height: 15em; width: 15em;">
+ <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Welcome!</h1>
 </div>
-
-
-
 <div class="quarto-title-meta">
-
-    
-    
   </div>
-  
-
-</header>
-
+</header><main class="content" id="quarto-document-content">
 <p>Welcome to my site!<br>
 Nothing much to see yet.</p>
 <section id="education" class="level2">
-<h2 class="anchored" data-anchor-id="education">Education</h2>
+<h2 data-anchor-id="education">Education</h2>
 <p>MSc. Student in statistics at the University of Copenhagen (KU) (September 2021 - now)</p>
 <p>BSc. in Mathematics with electives in statistics and CS from KU. (2018 - 2021)</p>
 </section>
 <section id="work" class="level2">
-<h2 class="anchored" data-anchor-id="work">Work</h2>
-<p>Data Scientist / Statistician at <a href="https://omicron.dk/">Omicron Aps</a> (June 2022 - now).</p>
+<h2 data-anchor-id="work">Work</h2>
+<p>Statistician at <a href="https://omicron.dk/">Omicron Aps</a> (June 2022 - now)</p>
 </section>
 <section id="interests" class="level2">
-<h2 class="anchored" data-anchor-id="interests">Interests</h2>
+<h2 data-anchor-id="interests">Interests</h2>
 <p>Statistical modelling, Bayesian statistics, Julia, R</p>
 </section>
 <section id="mail" class="level2">
-<h2 class="anchored" data-anchor-id="mail">Mail</h2>
+<h2 data-anchor-id="mail">Mail</h2>
 <p>laus (dot) w @ hotmail (dot) com</p>
 
 
 </section>
-
-</main> <!-- /main -->
+</main> 
+  <hr class="about-sep">
+   <div class="about-links">
+  <a href="https://linkedin.com/in/lauswullum" class="about-link">
+    <i class="bi bi-linkedin"></i>
+     <span class="about-link-text">LinkedIn</span>
+  </a>
+  <a href="https://github.com/lauswullum" class="about-link">
+    <i class="bi bi-github"></i>
+     <span class="about-link-text">Github</span>
+  </a>
+</div>
+</div>
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -161,13 +161,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const clipboard = new window.ClipboardJS('.code-copy-button', {
     target: function(trigger) {
       return trigger.previousElementSibling;
