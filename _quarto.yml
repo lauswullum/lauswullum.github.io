@@ -14,7 +14,7 @@ website:
         href: https://github.com/lauswullum
 format:
   html:
-    theme: litera
+    theme: cyborg
     css: styles.css
 
 
