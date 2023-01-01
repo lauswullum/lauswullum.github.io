@@ -14,41 +14,6 @@
     "text": "Jul 30, 2022\n\n\nLaus Wullum\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome!",
-    "section": "",
-    "text": "Welcome to my site!\nNothing much to see yet."
-  },
-  {
-    "objectID": "index.html#education",
-    "href": "index.html#education",
-    "title": "Welcome!",
-    "section": "Education",
-    "text": "Education\nMSc. Student in statistics at the University of Copenhagen (KU) (September 2021 - now)\nBSc. in Mathematics with electives in statistics and CS from KU. (2018 - 2021)"
-  },
-  {
-    "objectID": "index.html#work",
-    "href": "index.html#work",
-    "title": "Welcome!",
-    "section": "Work",
-    "text": "Work\nStatistician at Omicron Aps (June 2022 - now)"
-  },
-  {
-    "objectID": "index.html#interests",
-    "href": "index.html#interests",
-    "title": "Welcome!",
-    "section": "Interests",
-    "text": "Interests\nStatistical modelling, Bayesian statistics, Julia, R"
-  },
-  {
-    "objectID": "index.html#mail",
-    "href": "index.html#mail",
-    "title": "Welcome!",
-    "section": "Mail",
-    "text": "Mail\nlaus (dot) w @ hotmail (dot) com"
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "Laus Wolsing Wullum",
@@ -80,6 +45,41 @@
     "objectID": "about.html#mail",
     "href": "about.html#mail",
     "title": "Laus Wolsing Wullum",
+    "section": "Mail",
+    "text": "Mail\nlaus (dot) w @ hotmail (dot) com"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome!",
+    "section": "",
+    "text": "Welcome to my site!\nNothing much to see yet."
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Welcome!",
+    "section": "Education",
+    "text": "Education\nMSc. Student in statistics at the University of Copenhagen (KU) (September 2021 - now)\nBSc. in Mathematics with electives in statistics and CS from KU. (2018 - 2021)"
+  },
+  {
+    "objectID": "index.html#work",
+    "href": "index.html#work",
+    "title": "Welcome!",
+    "section": "Work",
+    "text": "Work\nStatistician at Omicron Aps (June 2022 - now)"
+  },
+  {
+    "objectID": "index.html#interests",
+    "href": "index.html#interests",
+    "title": "Welcome!",
+    "section": "Interests",
+    "text": "Interests\nStatistical modelling, Bayesian statistics, Julia, R"
+  },
+  {
+    "objectID": "index.html#mail",
+    "href": "index.html#mail",
+    "title": "Welcome!",
     "section": "Mail",
     "text": "Mail\nlaus (dot) w @ hotmail (dot) com"
   }
