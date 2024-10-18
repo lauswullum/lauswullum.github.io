@@ -1,19 +1,77 @@
 ---
 title: "A normal post"
 date: "2022-07-30"
-jupyter: julia-1.8
+jupyter: julia-1.11
 ---
 
-The normal post.
+## Relearning Turing.jl
+This is a small julia post for relearning Turing.jl after a while and a lot of
+updates.
+
+## Data
+We will use a dataset from a chapter on longitudinal data in the excellent online book on [Applied Modelling in Drug Development](https://opensource.nibr.com/bamdd/src/02g_longitudinal.html#data) written by statisticians from Novartis.
+The study data originates from a fictional longitudinal phase II study within
+dermatology studying a PASI score indicating severity of psoriasis for patients suffing from psoriasis. 
+The study is an RCT with 50 subjects allocated to treatment and 50 subjects
+allocated to placebo. We will start of by modelling to study outcome at week 12.
 
 ```{julia}
-#| layout-ncol: 2
-using UnicodePlots
-x1 = randn(1000)
-x2 = randn(1000)
-scatterplot(x1, x2, width = 20, height = 20)
+#| echo: false
+#| include: false
+
+#adpasi = CSV.read("data/longitudinal.csv", DataFrame)
+```
+```{julia}
+#| output: false
+ 
+## Load packages
+using Turing
+using CSV
+using DataFrames
+using TidierData
+using TidierPlots
+using CategoricalArrays
+
+
+# Load data from the parent folder
+adpasi = CSV.read(joinpath("..","..", "data", "longitudinal.csv"), DataFrame)
+
+# Name datasets and filter for PASI endpoint
+adpasi = @chain adpasi begin
+    @filter(TRT01P in ["PBO", "TRT"])
+end
+
+pasi_data = @chain adpasi begin 
+    @filter(PARAMCD == "PASITSCO")
+    @arrange(AVISITN)
+    @mutate(AVISITN1 = categorical(AVISITN))
+end
+
 ```
 
+## Overview
+
 ```{julia}
-histogram(randn(100_000), nbins=40, height=6)
+
+ggplot(pasi_data, 
+        @aes(x = AVISITN, y = AVAL, dodge = TRT01P, color = TRT01P)
+    ) + 
+    geom_violin() + 
+    theme_minimal()
+
+
 ```
+
+
+## Bayesian linear model
+We are going to posit the following model.
+
+$$
+\begin{align}
+PASI_i &\sim \mathcal{N}(\beta^T X_i, \sigma^2)\\
+\sigma^2 &\sim \mathcal{N}_+ (0, 10^2) \\
+\beta_i &\sim \mathcal{N}(0, 10) 
+\end{align}
+$$
+
+

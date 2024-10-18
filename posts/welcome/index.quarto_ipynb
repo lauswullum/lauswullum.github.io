@@ -1,0 +1,123 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"A normal post\"\n",
+        "date: \"2022-07-30\"\n",
+        "jupyter: julia-1.11\n",
+        "---\n",
+        "\n",
+        "\n",
+        "## Relearning Turing.jl\n",
+        "This is a small julia post for relearning Turing.jl after a while and a lot of\n",
+        "updates.\n",
+        "\n",
+        "## Data\n",
+        "We will use a dataset from a chapter on longitudinal data in the excellent online book on [Applied Modelling in Drug Development](https://opensource.nibr.com/bamdd/src/02g_longitudinal.html#data) written by statisticians from Novartis.\n",
+        "The study data originates from a fictional longitudinal phase II study within\n",
+        "dermatology studying a PASI score indicating severity of psoriasis for patients suffing from psoriasis. \n",
+        "The study is an RCT with 50 subjects allocated to treatment and 50 subjects\n",
+        "allocated to placebo. We will start of by modelling to study outcome at week 12.\n"
+      ],
+      "id": "8a411b0b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "#| include: false\n",
+        "\n",
+        "#adpasi = CSV.read(\"data/longitudinal.csv\", DataFrame)"
+      ],
+      "id": "929abd34",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| output: false\n",
+        " \n",
+        "## Load packages\n",
+        "using Turing\n",
+        "using CSV\n",
+        "using DataFrames\n",
+        "using TidierData\n",
+        "using TidierPlots\n",
+        "using CategoricalArrays\n",
+        "\n",
+        "\n",
+        "# Load data from the parent folder\n",
+        "adpasi = CSV.read(joinpath(\"..\",\"..\", \"data\", \"longitudinal.csv\"), DataFrame)\n",
+        "\n",
+        "# Name datasets and filter for PASI endpoint\n",
+        "adpasi = @chain adpasi begin\n",
+        "    @filter(TRT01P in [\"PBO\", \"TRT\"])\n",
+        "end\n",
+        "\n",
+        "pasi_data = @chain adpasi begin \n",
+        "    @filter(PARAMCD == \"PASITSCO\")\n",
+        "    @arrange(AVISITN)\n",
+        "    @mutate(AVISITN1 = categorical(AVISITN))\n",
+        "end"
+      ],
+      "id": "6c2cbac2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Overview\n"
+      ],
+      "id": "0513a701"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "ggplot(pasi_data, \n",
+        "        @aes(x = AVISITN, y = AVAL, dodge = TRT01P, color = TRT01P)\n",
+        "    ) + \n",
+        "    geom_violin() + \n",
+        "    theme_minimal()\n"
+      ],
+      "id": "32df4d21",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Bayesian linear model\n",
+        "We are going to posit the following model.\n",
+        "\n",
+        "$$\n",
+        "\\begin{align}\n",
+        "PASI_i &\\sim \\mathcal{N}(\\beta^T X_i, \\sigma^2)\\\\\n",
+        "\\sigma^2 &\\sim \\mathcal{N}_+ (0, 10^2) \\\\\n",
+        "\\beta_i &\\sim \\mathcal{N}(0, 10) \n",
+        "\\end{align}\n",
+        "$$\n"
+      ],
+      "id": "39c4298b"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "julia-1.11",
+      "language": "julia",
+      "display_name": "Julia 1.11.0",
+      "path": "/home/lauswullum/.local/share/jupyter/kernels/julia-1.11"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
