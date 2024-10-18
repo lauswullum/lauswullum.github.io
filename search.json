@@ -1,31 +1,73 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome!",
+    "section": "",
+    "text": "Welcome to my site!\nNothing much to see yet."
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Welcome!",
+    "section": "Education",
+    "text": "Education\nMSc. Student in statistics at the University of Copenhagen (KU) (September 2021 - now)\nBSc. in Mathematics with electives in statistics and CS from KU. (2018 - 2021)"
+  },
+  {
+    "objectID": "index.html#work",
+    "href": "index.html#work",
+    "title": "Welcome!",
+    "section": "Work",
+    "text": "Work\nStatistician at Omicron Aps (June 2022 - now)"
+  },
+  {
+    "objectID": "index.html#interests",
+    "href": "index.html#interests",
+    "title": "Welcome!",
+    "section": "Interests",
+    "text": "Interests\nStatistical modelling, Bayesian statistics, Julia, R"
+  },
+  {
+    "objectID": "index.html#mail",
+    "href": "index.html#mail",
+    "title": "Welcome!",
+    "section": "Mail",
+    "text": "Mail\nlaus (dot) w @ hotmail (dot) com"
+  },
+  {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
     "title": "A normal post",
     "section": "",
-    "text": "using UnicodePlots\nx1 = randn(1000)\nx2 = randn(1000)\nscatterplot(x1, x2, width = 20, height = 20)\n\n\n\n\n      ┌────────────────────┐ \n    4 │⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠁⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣇⠀⠀⠀⠀⠀⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠠⠀⠀⠀⡩⡀⡇⠀⠠⠀⠀⠀⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠁⠀⠰⡀⢌⣀⡷⢀⡂⣀⠀⠀⠀⠄⠀│ \n      │⠀⠀⠀⠀⠀⠀⠀⠠⠩⠆⣦⡧⢀⡄⡄⠀⠀⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠀⠀⡐⣸⣆⣶⣧⣧⢸⣑⡀⠀⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠀⠈⡊⡭⣶⣿⡿⣿⣷⣅⠙⠈⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠐⠁⣨⣟⣿⣷⣿⣿⡽⢲⠪⠄⡄⠀⠀│ \n      │⠀⠀⠀⠀⠐⠄⢤⡇⣾⣟⣿⣿⣿⣿⠻⡫⡀⠀⠀⠀│ \n      │⠉⠉⠉⠉⠉⠉⠙⣽⣽⣿⣽⣿⣿⢿⡟⣋⠫⠉⠉⠉│ \n      │⠀⠀⠀⠀⠀⢈⡂⡘⣺⣿⣯⣿⣟⢿⣹⠐⡒⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠄⠀⠁⢼⣿⣾⣿⡹⠿⢙⠣⠂⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠀⠀⠸⡊⠬⣽⡿⡴⠺⠳⠀⠄⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠀⠈⠀⢽⠱⠵⡗⠓⣧⠑⠀⠈⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠀⠈⠘⠊⠠⠉⡗⠠⠀⠑⠂⠀⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠀⠀⠀⠐⠀⠈⡇⠀⠀⠀⠀⠁⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠬⡇⠀⠄⠀⠀⠀⠀⠀⠀│ \n      │⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀│ \n   -4 │⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀│ \n      └────────────────────┘ \n      ⠀-5⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀4⠀ \n\n\n\n\n\n\nhistogram(randn(100_000), nbins=40, height=6)\n\n\n                ┌                                        ┐ \n   [-4.5, -4.0) ┤▏ 2                                       \n   [-4.0, -3.5) ┤▏ 21                                      \n   [-3.5, -3.0) ┤▎ 121                                     \n   [-3.0, -2.5) ┤▊ 497                                     \n   [-2.5, -2.0) ┤██▊ 1 670                                 \n   [-2.0, -1.5) ┤███████▌ 4 449                            \n   [-1.5, -1.0) ┤███████████████▌ 9 238                    \n   [-1.0, -0.5) ┤█████████████████████████▎ 15 067         \n   [-0.5,  0.0) ┤███████████████████████████████▊ 19 055   \n   [ 0.0,  0.5) ┤████████████████████████████████  19 131  \n   [ 0.5,  1.0) ┤█████████████████████████▏ 14 957         \n   [ 1.0,  1.5) ┤███████████████▎ 9 111                    \n   [ 1.5,  2.0) ┤███████▌ 4 461                            \n   [ 2.0,  2.5) ┤██▋ 1 584                                 \n   [ 2.5,  3.0) ┤▊ 491                                     \n   [ 3.0,  3.5) ┤▎ 126                                     \n   [ 3.5,  4.0) ┤▏ 18                                      \n   [ 4.0,  4.5) ┤▏ 1                                       \n                └                                        ┘ \n                                 Frequency"
+    "text": "This is a small julia post for relearning Turing.jl after a while and a lot of updates."
   },
   {
-    "objectID": "posts/welcome/randomization1.html",
-    "href": "posts/welcome/randomization1.html",
-    "title": "Stratified Randomization",
+    "objectID": "posts/welcome/index.html#relearning-turing.jl",
+    "href": "posts/welcome/index.html#relearning-turing.jl",
+    "title": "A normal post",
     "section": "",
-    "text": "In my thesis I studied stratified randomization and it’s consequences for modelling. In this post I will try to distill some of my work. This first blog post describes stratified randomization and its conseqeunces for modelling."
+    "text": "This is a small julia post for relearning Turing.jl after a while and a lot of updates."
   },
   {
-    "objectID": "posts/welcome/randomization1.html#stratified-randomization",
-    "href": "posts/welcome/randomization1.html#stratified-randomization",
-    "title": "Stratified Randomization",
-    "section": "Stratified Randomization",
-    "text": "Stratified Randomization\nStratified randomization solves the issue of covariate imbalance by stratifying the randomization onto levels of certain prognostic baseline covariates. These levels are called strata. As an example, you might use blocked randomization within males and females separately to balance the distribution of sex across treatment, and typically, you only stratify on a few variables.\nTo observe the consequences of stratified randomization for modeling, we posit the following trial in which we expect sex to be prognostic of the outcome and randomize patients within sex using blocked randomization. Let \\(Y\\) denote the continuous outcome, \\(X\\) denote sex, and \\(A\\) denote a binary treatment variable where we target a 1:1 allocation.\nInspired by (Kahan and Morris 2012) we posit the following DGP’s. For each \\(i = 1, \\dots, 100\\), let\n\\[\\begin{align*}\n&X_i \\sim \\text{Bernoulli}(1/2)\\\\\n&A_i \\sim \\text{Bernoulli}(1/2)\\\\\n&Y_i \\mid X_i, A_i \\sim \\alpha + \\beta_A A_i + \\beta_X X_i\n\\end{align*}\\]\nand\n\\[\\begin{align*}\n&X_i \\sim \\text{Bernoulli}(1/2)\\\\\n&A_i \\sim \\text{Stratified block randomization on } X \\text{ with a block size of 4} \\\\\n&Y_i \\mid X_i, A_i \\sim \\alpha + \\beta_A A_i + \\beta_X X_i\n\\end{align*}\\]\nIn the figure below, we simulate \\(N = 200\\) datasets, each of size \\(n = 100\\) with parameters \\((\\alpha = 0, \\beta_A = 0.2, \\beta_X = 0.5)\\), and plot the treatment specific means against each other.\n\n\nCode\n# Kahan, B. C., & Morris, T. P. (2011). Improper analysis of trials randomised\n# using stratified blocks or minimisation. Statistics in Medicine, 31(4),\n# 328–340. doi:10.1002/sim.4431 \nlibrary(tidyverse)\nlibrary(blockrand)\nlibrary(patchwork)\nlibrary(gridExtra)\n\n# Number of datasets\nN = 200\n\n# Size of each dataset\nn_size = 100\n\nsim_data = function(n_size, rand_type = 0, pX = 0.5) {\n\n    # Simulate binary baseline covariate / the balancing variable\n    sex = rbinom(n_size, 1, pX)\n\n    # Simple randomization\n    A_simple = rbinom(n_size, 1, 0.5)\n\n    # Stratified Randomization\n    A_strat = rep(0,n_size)\n    n1 = sum(sex == 1)\n    n0 = sum(sex == 0)\n    A_strat[sex == 1] = as.numeric(blockrand(n=n1, num.levels=2)$treatment, block.sizes = 4)[1:n1]-1\n    A_strat[sex == 0] = as.numeric(blockrand(n=n0, num.levels=2)$treatment, block.sizes = 4)[1:n0]-1\n\n    # Simulate outcome outcome\n    Y_simple = 0.2 * A_simple + 5 * sex + rnorm(n_size, sd = 1)\n    Y_strat = 0.2 * A_strat + 5 * sex + rnorm(n_size, sd = 1)\n\n    if (rand_type == 0) {\n        c(mean(Y_simple[A_simple == 0]), c(mean(Y_simple[A_simple == 1])))\n    } else {\n        c(mean(Y_strat[A_strat == 0]), c(mean(Y_strat[A_strat == 1])))\n    }\n}\n\n# Create a function to calculate correlation and annotate the plot\nannotate_corr = function(cor_val, x, y) {\n  annotate(\"text\", x = x, y = y, label = sprintf(\"Correlation: %.2f\", cor_val), hjust = 0, vjust = 1, size = 4)\n}\n\n\n# Simulate 200 datasets of size 50\n#set.seed(123)\nvec_simple = replicate(N, sim_data(n_size))\nvec_strat = replicate(N, sim_data(n_size, rand_type = 1))\n\n# Collect data into tibbles\nsimple_df = tibble(Y0 = vec_simple[1, ], Y1 = vec_simple[2, ]) \nstrat_df = tibble(Y0 = vec_strat[1, ], Y1 = vec_strat[2, ]) \n\n# Estimate the correlation\ncor_simple = cor(simple_df$Y0, simple_df$Y1)\ncor_strat = cor(strat_df$Y0, strat_df$Y1)\n\np_simple = simple_df %>% \n    ggplot() + \n    geom_point(aes(x = Y0, y = Y1), alpha = 0.5) + \n    theme_bw() + \n    xlab(\"Mean in treatment group\") + \n    ylab(\"Mean in control group\") + \n    ggtitle(\"Simple randomization\") +\n    xlim(0, 5) + \n    ylim(0, 5) +\n    annotate_corr(cor_simple, 2.5, 4.8)  \n\np_strat = strat_df %>% \n    ggplot() + \n    geom_point(aes(x = Y0, y = Y1), alpha = 0.5) + \n    theme_bw() + \n    xlab(\"Mean in treatment group\") + \n    ylab(\"\") + \n    ggtitle(\"Stratified randomization\") + \n    xlim(0, 5) + \n    ylim(0, 5) + \n    annotate_corr(cor_strat, 2.5, 4.8)  \n\ngrid.arrange(p_simple, p_strat, ncol = 2)\n\n\n\n\n\nNow we change the distribution of the binary baseline covariate \\(X\\), i.e.,\n\\[\\begin{align*}\n&X \\sim \\text{Bernoulli}(0.9)\\\\\n\\end{align*}\\]\nto make the distribution of sex more skewed. This yields\n\n\nCode\n#set.seed(123)\nvec_simple = replicate(N, sim_data(n_size, pX = 0.9))\nvec_strat = replicate(N, sim_data(n_size, rand_type = 1, pX = 0.9))\n\n# Collect data into tibbles\nsimple_df = tibble(Y0 = vec_simple[1, ], Y1 = vec_simple[2, ]) \nstrat_df = tibble(Y0 = vec_strat[1, ], Y1 = vec_strat[2, ]) \n\n# Estimate the correlation\ncor_simple = cor(simple_df$Y0, simple_df$Y1)\ncor_strat = cor(strat_df$Y0, strat_df$Y1)\n\np_simple = simple_df %>% \n    ggplot() + \n    geom_point(aes(x = Y0, y = Y1), alpha = 0.5) + \n    theme_bw() + \n    xlab(\"Mean in treatment group\") + \n    ylab(\"Mean in control group\") + \n    ggtitle(\"Simple randomization\") +\n    ylim(2.5, 6.5) + \n    xlim(2.5, 6.5) + \n    annotate_corr(cor_simple, 4.5, 5.8)  \n\np_strat = strat_df %>% \n    ggplot() + \n    geom_point(aes(x = Y0, y = Y1), alpha = 0.5) + \n    theme_bw() + \n    xlab(\"Mean in treatment group\") + \n    ylab(\"\") + \n    ggtitle(\"Stratified randomization\") +\n    ylim(2.5, 6.5) + \n    xlim(2.5, 6.5) + \n    annotate_corr(cor_strat, 4.5, 5.8) \n\ngrid.arrange(p_simple, p_strat, ncol = 2)\n\n\n\n\n\nThe non-zero correlation between the treatment-specific means in the case of stratified randomization arises from the fact that we force an equal distribution of \\(X\\) within each treatment arm. If \\(X\\) denotes sex (0: man, 1: woman), and if, by chance, we observe more women than men, stratified block randomization ensures more women than men within each treatment group. Since being a woman has a strong positive effect on the outcome, both treatment means will be larger. This is not the case for simple randomization.\nIn the second plot, we simulate from the same DGP’s but change the variance of \\(X\\), i.e., instead of \\(p_X = 0.5\\), we use \\(p_X = 0.9\\). The variance of \\(X\\) is, of course, \\(p_X(1 - p_X)\\) and is maximized when \\(p_X = 0.5\\).\nBy using a smaller variance and therefore a more skewed distribution of sex, we observe a lower correlation. This follows since the variance in the amount of women in each treatment group is overshadowed by the fixed individual variance."
+    "objectID": "posts/welcome/index.html#data",
+    "href": "posts/welcome/index.html#data",
+    "title": "A normal post",
+    "section": "Data",
+    "text": "Data\nWe will use a dataset from a chapter on longitudinal data in the excellent online book on Applied Modelling in Drug Development written by statisticians from Novartis. The study data originates from a fictional longitudinal phase II study within dermatology studying a PASI score indicating severity of psoriasis for patients suffing from psoriasis. The study is an RCT with 50 subjects allocated to treatment and 50 subjects allocated to placebo. We will start of by modelling to study outcome at week 12.\n\n## Load packages\nusing Turing\nusing CSV\nusing DataFrames\nusing TidierData\nusing TidierPlots\nusing CategoricalArrays\n\n\n# Load data from the parent folder\nadpasi = CSV.read(joinpath(\"..\",\"..\", \"data\", \"longitudinal.csv\"), DataFrame)\n\n# Name datasets and filter for PASI endpoint\nadpasi = @chain adpasi begin\n    @filter(TRT01P in [\"PBO\", \"TRT\"])\nend\n\npasi_data = @chain adpasi begin \n    @filter(PARAMCD == \"PASITSCO\")\n    @arrange(AVISITN)\n    @mutate(AVISITN1 = categorical(AVISITN))\nend"
   },
   {
-    "objectID": "blogfront.html",
-    "href": "blogfront.html",
-    "title": "Posts",
-    "section": "",
-    "text": "Jan 7, 2024\n\n\nLaus Wullum\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJul 30, 2022\n\n\nLaus Wullum\n\n\n\n\n\n\nNo matching items"
+    "objectID": "posts/welcome/index.html#overview",
+    "href": "posts/welcome/index.html#overview",
+    "title": "A normal post",
+    "section": "Overview",
+    "text": "Overview\n\nggplot(pasi_data, \n        @aes(x = AVISITN, y = AVAL, dodge = TRT01P, color = TRT01P)\n    ) + \n    geom_violin() + \n    theme_minimal()\n\n\ngeom_violin\ndata: inherits from plot\nx: inherits from plot \ny: inherits from plot"
+  },
+  {
+    "objectID": "posts/welcome/index.html#bayesian-linear-model",
+    "href": "posts/welcome/index.html#bayesian-linear-model",
+    "title": "A normal post",
+    "section": "Bayesian linear model",
+    "text": "Bayesian linear model\nWe are going to posit the following model.\n\\[\n\\begin{align}\nPASI_i &\\sim \\mathcal{N}(\\beta^T X_i, \\sigma^2)\\\\\n\\sigma^2 &\\sim \\mathcal{N}_+ (0, 10^2) \\\\\n\\beta_i &\\sim \\mathcal{N}(0, 10)\n\\end{align}\n\\]"
   },
   {
     "objectID": "about.html",
@@ -39,14 +81,14 @@
     "href": "about.html#education",
     "title": "Laus Wolsing Wullum",
     "section": "Education",
-    "text": "Education\nMSc. Student in statistics at the University of Copenhagen (KU) (September 2021 - January 2024)\nBSc. in Mathematics with electives in statistics and CS from KU. (2018 - 2021)"
+    "text": "Education\nMSc. Student in statistics at the University of Copenhagen (KU) (September 2021 - now)\nBSc. in Mathematics with electives in statistics and CS from KU. (2018 - 2021)"
   },
   {
     "objectID": "about.html#work",
     "href": "about.html#work",
     "title": "Laus Wolsing Wullum",
     "section": "Work",
-    "text": "Work\nstatistician at Omicron Aps (June 2022 - February 2024)\nStudent statistician at Omicron Aps (June 2022 - February 2024)"
+    "text": "Work\nStatistician at Omicron Aps (June 2022 - now)"
   },
   {
     "objectID": "about.html#interests",
@@ -63,38 +105,10 @@
     "text": "Mail\nlaus (dot) w @ hotmail (dot) com"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Laus Wullum",
+    "objectID": "blogfront.html",
+    "href": "blogfront.html",
+    "title": "Posts",
     "section": "",
-    "text": "Welcome to my site. You may find some of my writing on various topics by going to my blog."
-  },
-  {
-    "objectID": "index.html#work",
-    "href": "index.html#work",
-    "title": "Laus Wullum",
-    "section": "Work",
-    "text": "Work\nBiostatistician at Omicron Aps\n(February 2024 - now)\nStudent biostatistician at Omicron Aps\n(June 2022 - February 2024)"
-  },
-  {
-    "objectID": "index.html#education",
-    "href": "index.html#education",
-    "title": "Laus Wullum",
-    "section": "Education",
-    "text": "Education\nMSc. in Statistics\nUniversity of Copenhagen (KU)\n(September 2021 - January 2024)\nBSc. in Mathematics with electives in Statistics and Computer Science\nUniversity of Copenhagen (KU)\n(September 2018 - June 2021)"
-  },
-  {
-    "objectID": "index.html#interests",
-    "href": "index.html#interests",
-    "title": "Laus Wullum",
-    "section": "Interests",
-    "text": "Interests\nStatistical modelling, Bayesian statistics, Causal inference, Trial design, Julia, R"
-  },
-  {
-    "objectID": "index.html#mail",
-    "href": "index.html#mail",
-    "title": "Laus Wullum",
-    "section": "Mail",
-    "text": "Mail\nlaus (dot) w @ hotmail (dot) com"
+    "text": "A normal post\n\n\n\n\n\n\n\n\n\n\n\nJul 30, 2022\n\n\nLaus Wullum\n\n\n\n\n\n\nNo matching items"
   }
 ]
