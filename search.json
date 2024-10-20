@@ -4,14 +4,7 @@
     "href": "index.html",
     "title": "Welcome!",
     "section": "",
-    "text": "Welcome to my site!\nNothing much to see yet."
-  },
-  {
-    "objectID": "index.html#education",
-    "href": "index.html#education",
-    "title": "Welcome!",
-    "section": "Education",
-    "text": "Education\nMSc. Student in statistics at the University of Copenhagen (KU) (September 2021 - now)\nBSc. in Mathematics with electives in statistics and CS from KU. (2018 - 2021)"
+    "text": "Welcome to my site!"
   },
   {
     "objectID": "index.html#work",
@@ -19,6 +12,13 @@
     "title": "Welcome!",
     "section": "Work",
     "text": "Work\nStatistician at Omicron Aps (June 2022 - now)"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Welcome!",
+    "section": "Education",
+    "text": "Education\nMSc. in statistics at the University of Copenhagen (KU) (September 2021 - 2023)\nBSc. in Mathematics with electives in statistics and CS from KU. (2018 - 2021)"
   },
   {
     "objectID": "index.html#interests",
@@ -37,51 +37,58 @@
   {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
-    "title": "A normal post",
+    "title": "Bayesian Data Analysis in Julia",
     "section": "",
-    "text": "This is a small julia post for relearning Turing.jl after a while and a lot of updates."
+    "text": "The Julia PPL Turing.jl has had some updates. This blog post serves as a very basic introduction on how to work with a Turing.jl model."
   },
   {
     "objectID": "posts/welcome/index.html#relearning-turing.jl",
     "href": "posts/welcome/index.html#relearning-turing.jl",
-    "title": "A normal post",
+    "title": "Bayesian Data Analysis in Julia",
     "section": "",
-    "text": "This is a small julia post for relearning Turing.jl after a while and a lot of updates."
+    "text": "The Julia PPL Turing.jl has had some updates. This blog post serves as a very basic introduction on how to work with a Turing.jl model."
   },
   {
     "objectID": "posts/welcome/index.html#data",
     "href": "posts/welcome/index.html#data",
-    "title": "A normal post",
+    "title": "Bayesian Data Analysis in Julia",
     "section": "Data",
-    "text": "Data\nWe will use a dataset from a chapter on longitudinal data in the excellent online book on Applied Modelling in Drug Development written by statisticians from Novartis. The study data originates from a fictional longitudinal phase II study within dermatology studying a PASI score indicating severity of psoriasis for patients suffing from psoriasis. The study is an RCT with 50 subjects allocated to treatment and 50 subjects allocated to placebo. We will start of by modelling to study outcome at week 12.\n\n## Load packages\nusing Turing\nusing CSV\nusing DataFrames\nusing TidierData\nusing TidierPlots\nusing CategoricalArrays\n\n\n# Load data from the parent folder\nadpasi = CSV.read(joinpath(\"..\",\"..\", \"data\", \"longitudinal.csv\"), DataFrame)\n\n# Name datasets and filter for PASI endpoint\nadpasi = @chain adpasi begin\n    @filter(TRT01P in [\"PBO\", \"TRT\"])\nend\n\npasi_data = @chain adpasi begin \n    @filter(PARAMCD == \"PASITSCO\")\n    @arrange(AVISITN)\n    @mutate(AVISITN1 = categorical(AVISITN))\nend"
+    "text": "Data\nWe will use a dataset from a chapter on longitudinal data in the excellent online book on Applied Modelling in Drug Development written by statisticians from Novartis.\nThe data comes from a fictional longitudinal phase II dermatology study, focused on the PASI score, which measures psoriasis severity. Specifically, we will model the treatment effect compared to placebo on the PASI score at week 12, adjusting for baseline scores. For simplicity, we ignore the longitudinal aspect of the study, as the goal is to demonstrate Bayesian inference using Turing.jl in Julia with real, non-simulated data.\n\n## Load packages\nusing Turing\nusing CSV\nusing DataFrames\nusing TidierData\nusing TidierPlots\nusing CategoricalArrays\nusing FillArrays\nusing LinearAlgebra\n\n\n# Load data from the parent folder\nadpasi = CSV.read(joinpath(\"..\",\"..\", \"data\", \"longitudinal.csv\"), DataFrame)\n\n# Name datasets and filter for PASI endpoint at Week12\npasi_data = @chain adpasi begin \n    @filter(TRT01P in [\"PBO\", \"TRT\"])\n    @filter(PARAMCD == \"PASITSCO\")\n    @arrange(AVISITN)\nend\n\nxmat = @chain pasi_data begin\n    @filter(AVISIT == \"Week 12\")\n    @mutate(TRT01P1 = TRT01P == \"TRT\")\n    @select(TRT01P1, TRT01P, BASE, AVAL)\nend\n\n# Design matrix\ncovariate_mat = [ \n    xmat[!, \"TRT01P1\"] parse.(Float64, xmat[!, \"BASE\"])\n]\n\n# Outcome measurements at week 12\npasi_score_week_12 = xmat[!, \"AVAL\"]"
   },
   {
     "objectID": "posts/welcome/index.html#overview",
     "href": "posts/welcome/index.html#overview",
-    "title": "A normal post",
+    "title": "Bayesian Data Analysis in Julia",
     "section": "Overview",
-    "text": "Overview\n\nggplot(pasi_data, \n        @aes(x = AVISITN, y = AVAL, dodge = TRT01P, color = TRT01P)\n    ) + \n    geom_violin() + \n    theme_minimal()\n\n\ngeom_violin\ndata: inherits from plot\nx: inherits from plot \ny: inherits from plot"
+    "text": "Overview\n\ngeom_raincloud = geom_template(\"geom_raincloud\", [\"x\", \"y\"], :RainClouds)\n\nplot1 = @chain pasi_data begin\n    @filter(AVISIT == \"Week 12\")\n    ggplot(aes(x = :TRT01P, y = :AVAL, color = :TRT01P)) \n    geom_raincloud(size = 4)\n    theme_minimal()\nend\n\n\ngeom_raincloud\ndata: inherits from plot\nx: inherits from plot \ny: inherits from plot"
   },
   {
     "objectID": "posts/welcome/index.html#bayesian-linear-model",
     "href": "posts/welcome/index.html#bayesian-linear-model",
-    "title": "A normal post",
+    "title": "Bayesian Data Analysis in Julia",
     "section": "Bayesian linear model",
-    "text": "Bayesian linear model\nWe are going to posit the following model.\n\\[\n\\begin{align}\nPASI_i &\\sim \\mathcal{N}(\\beta^T X_i, \\sigma^2)\\\\\n\\sigma^2 &\\sim \\mathcal{N}_+ (0, 10^2) \\\\\n\\beta_i &\\sim \\mathcal{N}(0, 10)\n\\end{align}\n\\]"
+    "text": "Bayesian linear model\nWe are going to posit the following model, where \\(A\\) denotes treatment and \\(B\\) denotes the baseline PASI score. The specific prior does not concern us.\n\\[\n\\begin{align}\nPASI_i &\\sim \\mathcal{N}(\\alpha + \\beta_A A + \\beta_B B, \\sigma^2)\\\\\n\\sigma^2 &\\sim \\mathcal{N}_+ (0, 10) \\\\\n\\beta_A &\\sim \\mathcal{N}(0, 10) \\\\\n\\beta_B &\\sim \\mathcal{N}(0, 10)\\\\\n\\alpha &\\sim \\mathcal{N}(0, 10)\n\\end{align}\n\\]\nMore programatically,\nAVAL ~ BASE + TRT01P"
+  },
+  {
+    "objectID": "posts/welcome/index.html#turing.jl-model",
+    "href": "posts/welcome/index.html#turing.jl-model",
+    "title": "Bayesian Data Analysis in Julia",
+    "section": "Turing.jl model",
+    "text": "Turing.jl model\nIn turing.jl this becomes\n\n@model function lin_reg(x) \n    sigma_sq ~ truncated(Normal(0, 10); lower=0)\n    intercept ~ Normal(0, 10)\n    nfeatures = size(x, 2)\n    coefficients ~ MvNormal(Zeros(nfeatures), 10.0 * I)\n    mu = intercept .+ x * coefficients\n    y ~ MvNormal(mu, sigma_sq * I)\n\n    return mean(y)\nend"
+  },
+  {
+    "objectID": "posts/welcome/index.html#model-object",
+    "href": "posts/welcome/index.html#model-object",
+    "title": "Bayesian Data Analysis in Julia",
+    "section": "Model object",
+    "text": "Model object\nNow we can define the model unconditional.\n\nmodel = lin_reg(covariate_mat)\n\nWith this we can sample from the prior predictive distribution by.\n\npp_data = rand(model)\n\n(sigma_sq = 5.945744396767607, intercept = 7.065479859666402, coefficients = [7.415558272024761, 0.28503978263641916], y = [12.443114397433822, 20.48768875900952, 20.40865226231607, 27.63441138267089, 22.61920840845327, 10.135942424141762, 11.065394035393465, 11.055779768984966, 7.760617038099545, 7.962117493652581  …  13.489834454793154, 10.505961844030093, 15.611883388978043, 16.647506973460047, 12.166019728629717, 16.113059902800448, 14.7213800981334, 15.782323961181062, 17.20901587878648, 20.066437664360453])\n\n\nThis yiels a named tuple with parameters drawn and data sampled.\nWe can plot the data envisioned by our prior specification.\n\ngeom_raincloud = geom_template(\"geom_raincloud\", [\"x\", \"y\"], :RainClouds)\n\n@chain xmat begin\n    @mutate(AVAL_PP1 = Main.pp_data.y)\n    ggplot(aes(x = :TRT01P, y = :AVAL_PP1, color = :TRT01P)) \n    geom_raincloud(size = 4)\n    theme_minimal()\nend\n\n\ngeom_raincloud\ndata: inherits from plot\nx: inherits from plot \ny: inherits from plot \n\n\n\n\n\n\n\n\n\nWe can also fix the parameters at specific values in the model.\n\nparams_gen = (sigma_sq = 1, coefficients = [0.1, 0.3], intercept = 1)\n\nmodel_gen = fix(model, params_gen)\n\nrand(model_gen)\n\n(y = [5.350734034903162, 5.662247409476079, 10.916095718717838, 13.718536953684298, 11.72904542603359, 7.747811436532083, 6.973795947037776, 5.605299984952084, 3.2288635597051276, 5.84681915829362  …  4.72998007672836, 3.0245092723701124, 5.822898492646764, 8.215762628413277, 5.794527864935357, 2.895852105010178, 5.572807872841827, 4.88875167820717, 7.282831658150558, 8.298993360142614],)\n\n\nIf we have observed data, we can posit a conditional model.\n\nmodel_cond = model | (y = pasi_score_week_12,)\n\nDynamicPPL.Model{typeof(lin_reg), (:x,), (), (), Tuple{Matrix{Float64}}, Tuple{}, DynamicPPL.ConditionContext{@NamedTuple{y::Vector{Float64}}, DynamicPPL.DefaultContext}}(lin_reg, (x = [0.0 16.0; 1.0 20.3; … ; 1.0 21.8; 1.0 19.1],), NamedTuple(), ConditionContext((y = [36.7, 2.0, 5.9, 3.8, 0.5, 3.9, 7.7, 6.4, 4.4, 42.6, 10.8, 10.9, 7.8, 0.7, 5.5, 10.8, 5.8, 9.5, 6.2, 0.5, 41.6, 9.9, 17.7, 32.4, 9.1, 0.4, 32.9, 11.4, 4.5, 7.7, 4.2, 2.6, 2.6, 4.5, 7.0, 0.4, 1.2, 37.8, 3.7, 7.3, 3.5, 5.5, 9.5, 5.2, -0.2, 3.1, 7.5, 5.2, 4.8, 10.9, -0.4, 1.0, 4.3, 4.6, 4.5, 0.3, 37.7, 12.3, 3.0, 2.0, 11.5, 8.4, 4.0, 7.7, 4.3, 4.2, 3.8, 2.9, 9.6, 29.6, 5.2, 1.9, 5.1, 12.6, 27.8, 44.1, 5.0, 40.5, 8.4, 14.5, 3.5, 7.8, 23.5, 17.6, 5.7, 27.1, 0.5, 5.6, 4.2, 17.0, 1.6, 18.2, 1.1, 28.0, 4.8, 27.0, -0.2, 16.7, 33.7, 20.4, 0.3, 13.2, 4.9, 5.1, 5.4, 2.7, 3.8, 6.7],), DynamicPPL.DefaultContext()))\n\n\nThis can be used to perform inference.\n\npost_inf_chain = sample(model_cond, NUTS(), 1000)\n\n┌ Info: Found initial step size\n└   ϵ = 0.0015625\nSampling:   2%|█                                        |  ETA: 0:00:04Sampling: 100%|█████████████████████████████████████████| Time: 0:00:01\n\n\n\nChains MCMC chain (1000×16×1 Array{Float64, 3}):\nIterations        = 501:1:1500\nNumber of chains  = 1\nSamples per chain = 1000\nWall duration     = 18.43 seconds\nCompute duration  = 18.43 seconds\nparameters        = sigma_sq, intercept, coefficients[1], coefficients[2]\ninternals         = lp, n_steps, is_accept, acceptance_rate, log_density, hamiltonian_energy, hamiltonian_energy_error, max_hamiltonian_energy_error, tree_depth, numerical_error, step_size, nom_step_size\nSummary Statistics\n       parameters      mean       std      mcse   ess_bulk   ess_tail      rha ⋯\n           Symbol   Float64   Float64   Float64    Float64    Float64   Float6 ⋯\n         sigma_sq   59.4458    4.9628    0.1814   737.7216   578.8572    1.000 ⋯\n        intercept   11.8706    2.1834    0.0868   639.8011   518.2833    0.999 ⋯\n  coefficients[1]   -8.6119    1.3676    0.0559   602.1143   425.3895    0.999 ⋯\n  coefficients[2]    0.1215    0.1011    0.0038   694.5194   560.7130    1.000 ⋯\n                                                               2 columns omitted\nQuantiles\n       parameters       2.5%     25.0%     50.0%     75.0%     97.5% \n           Symbol    Float64   Float64   Float64   Float64   Float64 \n         sigma_sq    50.2749   56.0566   59.2143   62.7478   69.4691\n        intercept     7.7763   10.3673   11.8315   13.3302   16.0863\n  coefficients[1]   -11.2052   -9.4768   -8.6697   -7.7117   -5.9169\n  coefficients[2]    -0.0730    0.0494    0.1217    0.1901    0.3155\n\n\n\n\nThe samples are collected into an MCMCchain.jl object, which can be used for convergence diagnostics\nTo obtain posterior predictive samples we call predict on the model using the posterior draws.\n\npredict(model, post_inf_chain)\n\n\nChains MCMC chain (1000×108×1 Array{Float64, 3}):\nIterations        = 1:1:1000\nNumber of chains  = 1\nSamples per chain = 1000\nparameters        = y[1], y[2], y[3], y[4], y[5], y[6], y[7], y[8], y[9], y[10], y[11], y[12], y[13], y[14], y[15], y[16], y[17], y[18], y[19], y[20], y[21], y[22], y[23], y[24], y[25], y[26], y[27], y[28], y[29], y[30], y[31], y[32], y[33], y[34], y[35], y[36], y[37], y[38], y[39], y[40], y[41], y[42], y[43], y[44], y[45], y[46], y[47], y[48], y[49], y[50], y[51], y[52], y[53], y[54], y[55], y[56], y[57], y[58], y[59], y[60], y[61], y[62], y[63], y[64], y[65], y[66], y[67], y[68], y[69], y[70], y[71], y[72], y[73], y[74], y[75], y[76], y[77], y[78], y[79], y[80], y[81], y[82], y[83], y[84], y[85], y[86], y[87], y[88], y[89], y[90], y[91], y[92], y[93], y[94], y[95], y[96], y[97], y[98], y[99], y[100], y[101], y[102], y[103], y[104], y[105], y[106], y[107], y[108]\ninternals         = \nSummary Statistics\n  parameters      mean       std      mcse    ess_bulk    ess_tail      rhat   ⋯\n      Symbol   Float64   Float64   Float64     Float64     Float64   Float64   ⋯\n        y[1]   13.9302    7.7624    0.2590    902.6306    906.1256    0.9998   ⋯\n        y[2]    5.8694    7.6377    0.2467    956.8902    963.8516    1.0030   ⋯\n        y[3]    6.9514    8.0401    0.2807    812.7577    979.4179    1.0008   ⋯\n        y[4]    8.9743    7.8315    0.2619    896.3241    815.6239    0.9997   ⋯\n        y[5]    6.9256    7.7686    0.2498    969.5620    906.2947    1.0013   ⋯\n        y[6]   15.5112    8.0100    0.2680    888.3693    931.6873    1.0018   ⋯\n        y[7]   13.6694    7.8071    0.2500    977.3993   1021.8484    0.9999   ⋯\n        y[8]   13.7973    7.8567    0.2683    861.3707    943.7586    0.9996   ⋯\n        y[9]   13.3492    8.0236    0.2472   1052.4898    991.6390    1.0003   ⋯\n       y[10]   13.8125    7.7583    0.2391   1053.4703    980.8705    0.9993   ⋯\n       y[11]    7.0555    7.8799    0.2450   1035.8296    868.2807    1.0001   ⋯\n       y[12]    4.8385    7.7029    0.2502    947.8795    944.3411    0.9999   ⋯\n       y[13]   13.8627    7.8056    0.2516    963.2674    943.7586    1.0000   ⋯\n       y[14]    6.3663    7.9670    0.2556    976.4722    977.6814    1.0046   ⋯\n       y[15]   13.2084    7.4809    0.2270   1082.4542    906.1256    0.9993   ⋯\n       y[16]   14.8200    7.5804    0.2394   1002.6456    943.7586    1.0029   ⋯\n       y[17]   14.5661    8.0975    0.2608    947.1946    982.7992    0.9997   ⋯\n       y[18]    4.3030    7.8558    0.2558    942.2937   1015.6811    1.0049   ⋯\n       y[19]   14.5144    7.6247    0.2450    966.3331    908.3655    1.0023   ⋯\n       y[20]    5.7790    7.8771    0.2531    968.8276    971.6794    1.0017   ⋯\n       y[21]   15.1518    7.7619    0.2487    970.6578    807.0571    1.0003   ⋯\n       y[22]   14.5107    7.5301    0.2528    890.4250    915.3549    0.9991   ⋯\n       y[23]   14.2778    8.0578    0.2571    990.5276    848.2734    0.9992   ⋯\n      ⋮           ⋮         ⋮         ⋮          ⋮           ⋮          ⋮      ⋱\n                                                    1 column and 85 rows omitted\nQuantiles\n  parameters       2.5%     25.0%     50.0%     75.0%     97.5% \n      Symbol    Float64   Float64   Float64   Float64   Float64 \n        y[1]    -1.0677    8.5496   13.8569   19.0678   29.1246\n        y[2]    -8.3045    0.7000    5.6944   10.9398   20.5786\n        y[3]    -9.6234    1.5983    6.9414   12.5401   22.2867\n        y[4]    -6.1556    3.7657    9.1612   14.1261   24.2393\n        y[5]    -8.1186    1.4088    6.6921   12.3556   22.0755\n        y[6]    -0.6255   10.2666   15.5954   20.9539   31.7059\n        y[7]    -1.5310    8.5781   13.5077   18.8118   29.2659\n        y[8]    -0.8773    8.5049   13.7814   18.6332   29.7516\n        y[9]    -2.9205    8.1136   13.3701   18.7567   28.9926\n       y[10]    -1.9068    8.6400   13.7743   19.1377   28.9887\n       y[11]    -8.4473    1.6639    7.0582   12.1801   23.0921\n       y[12]   -10.0991   -0.3561    4.6333   10.0225   20.2396\n       y[13]    -1.2436    8.3955   13.8132   19.1446   29.0079\n       y[14]    -9.3554    1.1170    6.4572   11.8563   21.4153\n       y[15]    -1.0084    8.1577   12.8237   18.2235   27.8568\n       y[16]     0.5683    9.8812   14.8698   19.8926   30.3438\n       y[17]    -1.6841    9.1788   14.6087   19.8509   30.3065\n       y[18]   -10.8019   -1.1981    4.4422    9.7860   19.3089\n       y[19]    -0.2360    9.4057   14.5411   19.5608   28.8992\n       y[20]    -8.5626   -0.0834    5.6969   11.0859   20.9126\n       y[21]    -0.6736   10.1207   15.1452   20.2919   30.3570\n       y[22]    -0.1183    9.1469   14.6495   19.6111   28.8208\n       y[23]    -1.9075    9.0892   14.1527   19.4446   31.8881\n      ⋮           ⋮          ⋮         ⋮         ⋮         ⋮\n                                                  85 rows omitted\n\n\n\n\nWe can also obtain the generated quantities as in STAN. Here we obtain the results from the return statement within the Turing.jl model.\n\ngenerated_quantities(model, post_inf_chain)\n\n1000×1 Matrix{Float64}:\n 10.75341475458214\n  9.678382971421513\n  8.74340199695126\n 10.601352864042424\n  8.693646118498267\n 10.061552429187211\n  9.840577576278143\n  9.61594359280235\n 12.411084693028211\n 10.659947591903418\n 10.729258695750591\n 11.540965548771007\n  9.165613048993492\n  ⋮\n 10.665099987478436\n 12.008250183825638\n 10.089487059443389\n  9.43548415234166\n 10.142359712262888\n  8.901784195086716\n  8.254020852393527\n  9.913314687071997\n  9.87086190688091\n  8.697971472579914\n  8.67603947213954\n  9.79464839053165"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "Laus Wolsing Wullum",
     "section": "",
-    "text": "Welcome to my site!\nNothing much to see yet."
-  },
-  {
-    "objectID": "about.html#education",
-    "href": "about.html#education",
-    "title": "Laus Wolsing Wullum",
-    "section": "Education",
-    "text": "Education\nMSc. Student in statistics at the University of Copenhagen (KU) (September 2021 - now)\nBSc. in Mathematics with electives in statistics and CS from KU. (2018 - 2021)"
+    "text": "Welcome to my site!"
   },
   {
     "objectID": "about.html#work",
@@ -89,6 +96,13 @@
     "title": "Laus Wolsing Wullum",
     "section": "Work",
     "text": "Work\nStatistician at Omicron Aps (June 2022 - now)"
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Laus Wolsing Wullum",
+    "section": "Education",
+    "text": "Education\nMSc. in statistics at the University of Copenhagen (KU) (September 2021 - 2023)\nBSc. in Mathematics with electives in statistics and CS from KU. (2018 - 2021)"
   },
   {
     "objectID": "about.html#interests",
@@ -109,6 +123,6 @@
     "href": "blogfront.html",
     "title": "Posts",
     "section": "",
-    "text": "A normal post\n\n\n\n\n\n\n\n\n\n\n\nJul 30, 2022\n\n\nLaus Wullum\n\n\n\n\n\n\nNo matching items"
+    "text": "Bayesian Data Analysis in Julia\n\n\n\n\n\n\n\n\n\n\n\nJul 30, 2022\n\n\nLaus Wullum\n\n\n\n\n\n\nNo matching items"
   }
 ]
