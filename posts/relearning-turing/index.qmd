@@ -1,0 +1,175 @@
+---
+title: "Relearning Turing.jl"
+author: "Laus Wullum"
+date: "2022-07-30"
+engine: julia
+---
+
+## Relearning Turing.jl
+The Julia PPL Turing.jl has had some updates. This blog post serves as a very
+basic introduction on how to work with a Turing.jl model today.
+
+## Data
+We will use a dataset from a chapter on longitudinal data in the excellent
+online book on [Applied Modelling in Drug Development](https://opensource.nibr.com/bamdd/src/02g_longitudinal.html#data)
+written by statisticians from Novartis.
+
+The data comes from a fictional longitudinal phase II dermatology study,
+focused on the PASI score, which measures psoriasis severity. Specifically, we
+will model the treatment effect compared to placebo on the PASI score at week
+12, adjusting for baseline scores. For simplicity, we ignore the longitudinal
+aspect of the study, as the goal is to demonstrate Bayesian inference using
+Turing.jl in Julia with real, non-simulated data.
+
+```{julia}
+#| output: false
+using Turing
+using CSV
+using DataFrames
+using TidierData
+using TidierPlots
+using CategoricalArrays
+using FillArrays
+using LinearAlgebra
+using AlgebraOfGraphics
+using CairoMakie
+
+
+# Load data from the parent folder
+adpasi = CSV.read(joinpath("..","..", "data", "longitudinal.csv"), DataFrame)
+
+# Name datasets and filter for PASI endpoint at Week12
+pasi_data = @chain adpasi begin
+    @filter(TRT01P in ["PBO", "TRT"])
+    @filter(PARAMCD == "PASITSCO")
+    @arrange(AVISITN)
+end
+
+xmat = @chain pasi_data begin
+    @filter(AVISIT == "Week 12")
+    @mutate(TRT01P1 = TRT01P == "TRT")
+    @select(TRT01P1, TRT01P, BASE, AVAL)
+end
+
+# Design matrix
+covariate_mat = [
+    xmat[!, "TRT01P1"] parse.(Float64, xmat[!, "BASE"])
+]
+
+# Outcome measurements at week 12
+pasi_score_week_12 = xmat[!, "AVAL"]
+```
+
+## Overview
+```{julia}
+#| output: false
+data(pasi_data) *
+    visual(Violin) *
+    mapping(:AVISIT, :AVAL, color = :TRT01P, dodge = :TRT01P) |>
+    draw
+```
+
+## Bayesian linear model
+We are going to posit the following model, where `TRT01P1` denotes treatment
+and `BASE` is the baseline PASI score. The specific prior does not concern us.
+
+More programmatically,
+
+`AVAL ~ BASE + TRT01P`
+
+$$
+\begin{align}
+PASI_i &\sim \mathcal{N}(\beta^T X_i, \sigma^2)\\
+\sigma^2 &\sim \mathcal{N}_+ (0, 10^2) \\
+\beta_i &\sim \mathcal{N}(0, 10)
+\end{align}
+$$
+
+## Turing.jl model
+In Turing.jl this becomes:
+
+```{julia}
+#| output: false
+@model function lin_reg(x)
+    sigma_sq ~ truncated(Normal(0, 10); lower = 0)
+    intercept ~ Normal(0, 10)
+    nfeatures = size(x, 2)
+    coefficients ~ MvNormal(Zeros(nfeatures), 10.0 * I)
+    mu = intercept .+ x * coefficients
+    y ~ MvNormal(mu, sigma_sq * I)
+
+    return mean(y)
+end
+```
+
+## Model object
+Now we can define the model unconditional.
+
+```{julia}
+#| output: false
+model = lin_reg(covariate_mat)
+```
+
+With this we can sample from the prior predictive distribution by.
+
+```{julia}
+#| output: false
+pp_data = rand(model)
+```
+
+This yields a named tuple with parameters drawn and data sampled.
+
+We can plot the data envisioned by our prior specification.
+
+```{julia}
+#| output: false
+xmat.AVAL_PP1 = pp_data.y
+data(xmat) *
+    visual(Violin) *
+    mapping(:TRT01P, :AVAL_PP1, color = :TRT01P, dodge = :TRT01P) |>
+    draw
+```
+
+We can also fix the parameters at specific values in the model.
+
+```{julia}
+#| output: false
+params_gen = (sigma_sq = 1, coefficients = [0.1, 0.3], intercept = 1)
+
+model_gen = fix(model, params_gen)
+
+rand(model_gen)
+```
+
+If we have observed data, we can posit a conditional model.
+
+```{julia}
+#| output: false
+model_cond = model | (y = pasi_score_week_12,)
+```
+
+This can be used to perform inference.
+
+```{julia}
+#| output: false
+post_inf_chain = sample(model_cond, NUTS(), 1000)
+```
+
+The samples are collected into an `MCMCchain.jl` object, which can be used for
+convergence diagnostics.
+
+To obtain posterior predictive samples we call `predict` on the model using the
+posterior draws.
+
+```{julia}
+#| output: false
+predict(model, post_inf_chain)
+```
+
+We can also obtain the generated quantities as in Stan. Here we obtain the
+results from the return statement within the Turing.jl model.
+
+```{julia}
+#| output: false
+generated_quantities(model, post_inf_chain)
+```
