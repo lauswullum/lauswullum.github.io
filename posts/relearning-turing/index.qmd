@@ -3,6 +3,8 @@ title: "Relearning Turing.jl"
 author: "Laus Wullum"
 date: "2022-07-30"
 engine: julia
+julia:
+  exeflags: ["--project=@v1.12"]
 ---
 
 ## Relearning Turing.jl
@@ -22,21 +24,20 @@ aspect of the study, as the goal is to demonstrate Bayesian inference using
 Turing.jl in Julia with real, non-simulated data.
 
 ```{julia}
-#| output: false
 using Turing
 using CSV
 using DataFrames
-using TidierData
+using TidierData 
 using TidierPlots
 using CategoricalArrays
 using FillArrays
-using LinearAlgebra
-using AlgebraOfGraphics
-using CairoMakie
+using LinearAlgebra 
+using AlgebraOfGraphics 
+using CairoMakie 
 
 
 # Load data from the parent folder
-adpasi = CSV.read(joinpath("..","..", "data", "longitudinal.csv"), DataFrame)
+adpasi = CSV.read(joinpath("..", "..", "data", "longitudinal.csv"), DataFrame)
 
 # Name datasets and filter for PASI endpoint at Week12
 pasi_data = @chain adpasi begin
@@ -62,7 +63,6 @@ pasi_score_week_12 = xmat[!, "AVAL"]
 
 ## Overview
 ```{julia}
-#| output: false
 data(pasi_data) *
     visual(Violin) *
     mapping(:AVISIT, :AVAL, color = :TRT01P, dodge = :TRT01P) |>
@@ -89,7 +89,6 @@ $$
 In Turing.jl this becomes:
 
 ```{julia}
-#| output: false
 @model function lin_reg(x)
     sigma_sq ~ truncated(Normal(0, 10); lower = 0)
     intercept ~ Normal(0, 10)
@@ -106,14 +105,12 @@ end
 Now we can define the model unconditional.
 
 ```{julia}
-#| output: false
 model = lin_reg(covariate_mat)
 ```
 
 With this we can sample from the prior predictive distribution by.
 
 ```{julia}
-#| output: false
 pp_data = rand(model)
 ```
 
@@ -122,7 +119,6 @@ This yields a named tuple with parameters drawn and data sampled.
 We can plot the data envisioned by our prior specification.
 
 ```{julia}
-#| output: false
 xmat.AVAL_PP1 = pp_data.y
 data(xmat) *
     visual(Violin) *
@@ -133,7 +129,6 @@ data(xmat) *
 We can also fix the parameters at specific values in the model.
 
 ```{julia}
-#| output: false
 params_gen = (sigma_sq = 1, coefficients = [0.1, 0.3], intercept = 1)
 
 model_gen = fix(model, params_gen)
@@ -144,14 +139,12 @@ rand(model_gen)
 If we have observed data, we can posit a conditional model.
 
 ```{julia}
-#| output: false
 model_cond = model | (y = pasi_score_week_12,)
 ```
 
 This can be used to perform inference.
 
 ```{julia}
-#| output: false
 post_inf_chain = sample(model_cond, NUTS(), 1000)
 ```
 
@@ -162,14 +155,5 @@ To obtain posterior predictive samples we call `predict` on the model using the
 posterior draws.
 
 ```{julia}
-#| output: false
 predict(model, post_inf_chain)
-```
-
-We can also obtain the generated quantities as in Stan. Here we obtain the
-results from the return statement within the Turing.jl model.
-
-```{julia}
-#| output: false
-generated_quantities(model, post_inf_chain)
 ```
