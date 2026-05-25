@@ -2,6 +2,7 @@
 title: "Relearning Turing.jl"
 author: "Laus Wullum"
 date: "2022-07-30"
+image: false
 engine: julia
 julia:
   exeflags: ["--project=@v1.12"]
@@ -13,8 +14,7 @@ basic introduction on how to work with a Turing.jl model today.
 
 ## Data
 We will use a dataset from a chapter on longitudinal data in the excellent
-online book on [Applied Modelling in Drug Development](https://opensource.nibr.com/bamdd/src/02g_longitudinal.html#data)
-written by statisticians from Novartis.
+online book on [Applied Modelling in Drug Development](https://opensource.nibr.com/bamdd/src/02g_longitudinal.html#data) written by statisticians from Novartis.
 
 The data comes from a fictional longitudinal phase II dermatology study,
 focused on the PASI score, which measures psoriasis severity. Specifically, we
@@ -38,6 +38,7 @@ using CairoMakie
 
 # Load data from the parent folder
 adpasi = CSV.read(joinpath("..", "..", "data", "longitudinal.csv"), DataFrame)
+#adpasi = CSV.read(joinpath("data", "longitudinal.csv"), DataFrame)
 
 # Name datasets and filter for PASI endpoint at Week12
 pasi_data = @chain adpasi begin
@@ -65,13 +66,19 @@ pasi_score_week_12 = xmat[!, "AVAL"]
 ```{julia}
 data(pasi_data) *
     visual(Violin) *
-    mapping(:AVISIT, :AVAL, color = :TRT01P, dodge = :TRT01P) |>
+    mapping(
+        :AVISIT => "Visit",
+        :AVAL => "PASI score",
+        color = :TRT01P => "Treatment",
+        dodge = :TRT01P,
+    ) |>
     draw
 ```
 
 ## Bayesian linear model
 We are going to posit the following model, where `TRT01P1` denotes treatment
-and `BASE` is the baseline PASI score. The specific prior does not concern us.
+and `BASE` is the baseline PASI score, and AVAL is the outcome score at week 12.
+The specific prior does not concern us.
 
 More programmatically,
 
@@ -102,13 +109,13 @@ end
 ```
 
 ## Model object
-Now we can define the model unconditional.
+Now we can define the model unconditionally.
 
 ```{julia}
 model = lin_reg(covariate_mat)
 ```
 
-With this we can sample from the prior predictive distribution by.
+With this we can sample from the prior predictive distribution:
 
 ```{julia}
 pp_data = rand(model)
@@ -116,13 +123,18 @@ pp_data = rand(model)
 
 This yields a named tuple with parameters drawn and data sampled.
 
-We can plot the data envisioned by our prior specification.
+We can plot the data envisioned by our prior specification. (The prior predictive distribution is not very good, but that is beside the point here.)
 
 ```{julia}
 xmat.AVAL_PP1 = pp_data.y
 data(xmat) *
     visual(Violin) *
-    mapping(:TRT01P, :AVAL_PP1, color = :TRT01P, dodge = :TRT01P) |>
+    mapping(
+        :TRT01P => "Treatment",
+        :AVAL_PP1 => "Prior predictive PASI score at week 12",
+        color = :TRT01P => "Treatment",
+        dodge = :TRT01P,
+    ) |>
     draw
 ```
 
@@ -136,13 +148,13 @@ model_gen = fix(model, params_gen)
 rand(model_gen)
 ```
 
-If we have observed data, we can posit a conditional model.
+We can posit a conditional model on the observed data, to perform inference on the posterior distribution of the parameters.
 
 ```{julia}
 model_cond = model | (y = pasi_score_week_12,)
 ```
 
-This can be used to perform inference.
+This object can be used to perform inference.
 
 ```{julia}
 post_inf_chain = sample(model_cond, NUTS(), 1000)
