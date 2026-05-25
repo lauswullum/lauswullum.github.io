@@ -2,7 +2,8 @@
   {
     "listing": "/blogfront.html",
     "items": [
-      "/posts/welcome/index.html"
+      "/posts/don-quixote/index.html",
+      "/posts/relearning-turing/index.html"
     ]
   }
 ]
