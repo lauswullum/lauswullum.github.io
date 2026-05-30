@@ -1,9 +1,9 @@
 ---
-title: "Welcome!"
+title: "Laus Wullum"
 image: profile.png
 toc: false
 about: 
-  template: jolla
+  template: solana
   links:
     - icon: linkedin
       text: LinkedIn
@@ -13,25 +13,27 @@ about:
       href: https://github.com/lauswullum
 ---
 
-Welcome to my site!  
-Nothing much to see yet.
+I am a statistician working with statistical modelling, Bayesian statistics, causality, Julia, and R.
 
 ## Work
-Statistician at 
-<a href="https://omicron.dk/">Omicron Aps</a> (June 2022 - now)
 
+Statistician at [Omicron Aps](https://omicron.dk/)  
+June 2022 - now
+
+Data science contractor in Computational Real World Evidence at Novo Nordisk A/S  
+Part time, September 2025 - now
 
 ## Education
-MSc. Statistics at the University of Copenhagen (KU) (September 2021 - January 2024)  
 
-BSc. Mathematics with electives in statistics and CS from KU. (2018 - 2021)
+MSc Statistics, University of Copenhagen  
+September 2021 - January 2024
 
-## Interests
-Statistical modelling, Bayesian statistics, Causality, Julia, R
+BSc Mathematics with electives in statistics and CS, University of Copenhagen  
+2018 - 2021
 
-## Mail
+## Contact
+
 laus (dot) w @ hotmail (dot) com
-
 
 
 

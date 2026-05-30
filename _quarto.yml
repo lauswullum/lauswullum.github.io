@@ -14,8 +14,7 @@ website:
         href: https://github.com/lauswullum
 format:
   html:
-    theme: lux
-    css: styles.css
+    theme: pressmark.scss
 
 
 
