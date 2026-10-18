@@ -1,7 +1,7 @@
 * { box-sizing: border-box; }
 html { background: #fff; color: #171717; }
 :root {
-  --background-wash: .60;
+  --background-wash: .75;
   --background-painting: url("assets/images/jens-juel-landskab-ved-oresund.webp");
 }
 body { margin: 0; isolation: isolate; }
