@@ -1,0 +1,35 @@
+---
+title: "Don Quixote's advice to Sancho Panza"
+date: "2026-05-23"
+---
+
+From Don Quixote to Sancho Panza just before Sancho becomes governor of his insula.
+
+-   Fear god, because in fearing Him lies wisdom.
+-   If you are wise, you cannot err in anything.
+-   Look at who you are and make an effort to know yourself.
+-   Take pride in the humbleness of your lineage.
+-   Take more pride in being a humble virtuous man than in being a noble sinner.
+-   Never be guided by arbitrariness in law.
+-   Let the tears of the poor find in you more compassion, but not more justice than the briefs of the wealthy.
+-   Try to discover the truth in all the promises and gifts of the rich man, as well as in the poor man\'s sobs and entreaties.
+-   When there can and should be a place for impartiality, do not bring the entire rigor of the law to bear on the offender, for the reputation of the harsh judge is not better than that of the compassionate one.
+-   If you happen to bend the staff of justice, let it be with the weight not of a gift, but of mercy.
+-   If you judge the case of one of your enemies, put your injury out of your mind and turn your thoughts to the truth of the question.
+-   Do not be blinded by your own passion in another\'s trial.
+-   If a beautiful woman comes to you to plead for justice, turn your eyes from her tears and your ears from her sobs, and consider without haste the substance of what she is asking if you do not want your reason to be drowned in her weeping and your goodness in her sighs.
+-   If you must punish a man with deeds, do not abuse him with words, for the pain of punishment is enough for the unfortunate man without the addition of malicious speech.
+-   Consider the culprit who falls under your jurisdiction as a fallen man subject to the conditions of our depraved nature, and to the extent that you can, without doing injury to the opposing party, show him compassion and clemency, because although all the attributes of God are equal, in our view mercy is more brilliant and splendid than justice.
+-   Keep clean and trim your nails.
+-   Do not go around unbelted and negligent.
+-   Do not eat garlic or onions lest their smell reveal your peasant origins.
+-   Walk slowly.
+-   Speak calmly, but not in a way that makes it seem you are listening to yourself, for all affectation is wrong.
+-   Eat sparingly at midday and even less for supper, for the health of the entire body is forged in the workshop of the stomach.
+-   Be temperate in your drinking, remembering that too much wine cannot keep either a secret or a promise.
+-   Be careful not to chew with your mouth full or to eructate in front of anyone.
+-   Be moderate in your sleeping, for the man who does not get up with the sun does not possess the day.
+-   Never become involved in arguing about lineages.
+-   Your dress should be full length breeches, and long doublet, and a slightly longer cape; absolutely no pantaloons.
+
+*From the Edith Grossman translation, 2003*
