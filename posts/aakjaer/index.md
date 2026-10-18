@@ -5,6 +5,8 @@ date: "2026-10-18"
 
 Fra digtsamlingen Frit felt (1905)
 
+**Efteraarsvise** 
+
 Gjøgen galed i Danmarks Lund, \
 og Fjordene blaaned saa vide, \
 Havren ringled i Middagsblund — \
