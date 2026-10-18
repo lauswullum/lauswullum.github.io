@@ -11,3 +11,7 @@ Thumbs.db
 _site/
 _freeze/
 **/*.quarto_ipynb
+
+# Python build caches
+__pycache__/
+*.pyc

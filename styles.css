@@ -1,6 +1,25 @@
 * { box-sizing: border-box; }
 html { background: #fff; color: #171717; }
-body { margin: 0; }
+:root { --background-wash: .50; }
+body { margin: 0; isolation: isolate; }
+/* A fixed decorative layer covers the viewport on short and long pages alike.
+   The white overlay keeps text readable without changing the original image. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, var(--background-wash)),
+      rgba(255, 255, 255, var(--background-wash))
+    ),
+    url("assets/images/jens-juel-landskab-ved-oresund.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 a { color: #0000bb; text-decoration: underline; text-underline-offset: 2px; }
 a:visited { color: #551a8b; }
 a:hover { color: #9b2100; }
@@ -56,3 +75,14 @@ footer { margin-top: 2rem; }
   }
   h1 { font-size: 1.8em; }
 }
+
+/* Markdown posts use the same list spacing as the original article. */
+.post-body ul, .post-body ol { padding-left: 1.4em; }
+.post-body li { padding-left: .2em; margin: 0 0 .8em; }
+.post-body img { max-width: 100%; height: auto; }
+.post-body blockquote { margin: 1.5em 0; padding-left: 1em; border-left: 2px solid #aaa; }
+.post-body .math.display { display: block; overflow-x: auto; overflow-y: hidden; padding: .5em 0; }
+.post-body table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; }
+.post-body th, .post-body td { padding: .3em .7em; border-bottom: 1px solid #ccc; }
+
+@media print { body::before { display: none; } }
