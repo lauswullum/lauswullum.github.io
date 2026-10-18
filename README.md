@@ -118,8 +118,8 @@ python3 -m unittest discover -s tests -v
 
 ## Painting background
 
-The entire site uses Jens Juel's *Landskab ved Øresund*, copied from the supplied local image into `assets/images/jens-juel-landskab-ved-oresund.jpg`. The original Downloads file is untouched.
+The entire site uses Jens Juel's *Landskab ved Øresund*. The supplied JPEG is retained in `assets/images/jens-juel-landskab-ved-oresund.jpg`, and the original Downloads file is untouched. The browser loads compressed WebP copies: `jens-juel-landskab-ved-oresund.webp` on desktop (about 403 KB) and `jens-juel-landskab-ved-oresund-mobile.webp` on screens 760px or narrower (about 46 KB). The original 3.9 MB JPEG is not downloaded by the pages.
 
 `styles.css` places the painting in a fixed, full-viewport decorative layer behind the content, with a white overlay. The image is cropped to cover the screen without stretching, including on mobile. It is omitted when printing.
 
-Change `--background-wash: .90` near the top of `styles.css` to adjust the effect: `.95` makes it fainter; `.85` makes it more visible. Refresh the page after editing; rebuilding Markdown is unnecessary. All pages using the shared stylesheet receive the background automatically.
+Change `--background-wash: .50` near the top of `styles.css` to adjust the effect: higher values such as `.90` make it fainter; lower values make it more visible. Refresh the page after editing; rebuilding Markdown is unnecessary. All pages using the shared stylesheet receive the background automatically.

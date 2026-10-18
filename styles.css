@@ -1,6 +1,9 @@
 * { box-sizing: border-box; }
 html { background: #fff; color: #171717; }
-:root { --background-wash: .50; }
+:root {
+  --background-wash: .50;
+  --background-painting: url("assets/images/jens-juel-landskab-ved-oresund.webp");
+}
 body { margin: 0; isolation: isolate; }
 /* A fixed decorative layer covers the viewport on short and long pages alike.
    The white overlay keeps text readable without changing the original image. */
@@ -15,7 +18,7 @@ body::before {
       rgba(255, 255, 255, var(--background-wash)),
       rgba(255, 255, 255, var(--background-wash))
     ),
-    url("assets/images/jens-juel-landskab-ved-oresund.jpg");
+    var(--background-painting);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -53,6 +56,9 @@ h2 { font-size: 1em; text-transform: uppercase; letter-spacing: .1em; border-bot
 footer { margin-top: 2rem; }
 /* Give narrow screens one readable column and comfortable touch targets. */
 @media (max-width: 760px) {
+  :root {
+    --background-painting: url("assets/images/jens-juel-landskab-ved-oresund-mobile.webp");
+  }
   body {
     display: block;
     margin: 1.5rem auto;
