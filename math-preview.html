@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Math preview">
+<title>Math preview — Laus Wullum</title>
+<link rel="stylesheet" href="styles.css">
+<script defer src="math-config.js"></script>
+<script defer src="assets/mathjax/tex-svg.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header><a class="site-name" href="index.html">Laus Wullum</a>
+<nav aria-label="Main navigation"><a href="index.html">Home</a> <a href="blogfront.html">Blog</a> <a href="https://github.com/lauswullum">GitHub</a></nav></header>
+<main id="main"><h1>Math preview</h1><p>This local reference page shows how to write equations for future posts.</p>
+<h2>Inline math</h2><p>A normal random variable has expectation $\mathbb{E}[X]=\mu$ and variance $\sigma^2$.</p>
+<h2>Displayed math</h2><div class="math-block">$$p(\theta\mid y)=\frac{p(y\mid\theta)\,p(\theta)}{\int p(y\mid\vartheta)\,p(\vartheta)\,d\vartheta}$$</div>
+<h2>Aligned equations</h2><div class="math-block">$$\begin{aligned} y_i &amp;\sim \mathcal{N}(\alpha+\beta x_i,\sigma^2) \\ \alpha,\beta &amp;\sim \mathcal{N}(0,10^2) \\ \sigma &amp;\sim \operatorname{HalfNormal}(1) \end{aligned}$$</div>
+<h2>Writing a formula</h2><pre><code>&lt;p&gt;Inline: $\mathbb{E}[X] = \mu$.&lt;/p&gt;
+&lt;div class="math-block"&gt;$$y = \alpha + \beta x$$&lt;/div&gt;</code></pre>
+<p>Copy this page's two script tags into any page that needs math. Use <code>&amp;amp;</code> for ampersands and <code>&amp;lt;</code> for less-than signs inside HTML.</p></main>
+<footer>Laus Wullum · <a href="index.html#contact">Contact</a></footer>
+</body>
+</html>

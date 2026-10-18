@@ -1,1 +1,58 @@
-/* css styles */
+* { box-sizing: border-box; }
+html { background: #fff; color: #171717; }
+body { margin: 0; }
+a { color: #0000bb; text-decoration: underline; text-underline-offset: 2px; }
+a:visited { color: #551a8b; }
+a:hover { color: #9b2100; }
+a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.skip { position: absolute; left: -10000px; }
+.skip:focus { left: 1rem; top: 1rem; background: white; padding: .5rem; }
+h1, h2 { line-height: 1.2; }
+h2 { margin: 1.6em 0 .6em; }
+p { margin: .7em 0 1em; }
+nav a[aria-current="page"] { color: #171717; text-decoration: none; }
+.meta, .dates { color: #555; }
+.dates { display: block; font-size: .9em; }
+.entry { margin-bottom: 1em; }
+.advice { padding-left: 1.4em; }
+.advice li { padding-left: .2em; margin: 0 0 .8em; }
+.post-list { padding: 0; list-style: none; }
+.post-list li { margin: 1.5em 0; }
+.post-list time { display: block; font-size: .85em; color: #555; }
+.math-block { overflow-x: auto; overflow-y: hidden; padding: .5em 0; }
+pre { overflow: auto; padding: 1em; background: #f4f4f4; font-size: .85em; }
+footer { margin-top: 3rem; padding-top: .75rem; border-top: 1px solid #aaa; font-size: .8em; color: #555; }
+@media print { nav, .skip, footer { display: none; } body { max-width: none; margin: 0; } a { color: inherit; } }
+body { max-width: 1020px; margin: 4rem auto; padding: 0 2rem; display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 0 3rem; font-family: "Courier New", Courier, monospace; font-size: 15px; line-height: 1.7; }
+header { grid-column: 1; grid-row: 1 / 3; border-right: 1px solid #222; padding-right: 1.5rem; }
+.site-name { color: #171717; font-weight: bold; text-decoration: none; display: block; line-height: 1.3; margin-bottom: 1.8rem; font-size: 1.2em; }
+nav a { display: block; width: fit-content; margin-bottom: .6em; }
+main, footer { grid-column: 2; min-width: 0; overflow-wrap: anywhere; }
+h1 { font-size: 1.9em; letter-spacing: -.05em; margin: 0 0 1em; }
+h2 { font-size: 1em; text-transform: uppercase; letter-spacing: .1em; border-bottom: 1px solid #ccc; padding-bottom: .25em; }
+.intro { display: flow-root; margin-bottom: 2rem; }
+footer { margin-top: 2rem; }
+/* Give narrow screens one readable column and comfortable touch targets. */
+@media (max-width: 760px) {
+  body {
+    display: block;
+    margin: 1.5rem auto;
+    padding: 0 1.15rem;
+    font-size: 16px;
+  }
+  header {
+    border-right: 0;
+    border-bottom: 1px solid #222;
+    padding: 0 0 .5rem;
+    margin-bottom: 2rem;
+  }
+  .site-name { margin-bottom: .5rem; }
+  nav { display: flex; flex-wrap: wrap; gap: 0 1.4rem; }
+  nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin: 0;
+  }
+  h1 { font-size: 1.8em; }
+}

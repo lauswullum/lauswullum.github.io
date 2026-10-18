@@ -1,4 +1,13 @@
-/.quarto/
-/_site/
+# Local editor history and tooling
+.lh/
+.history/
+.agents/
+.codex/
+.DS_Store
+Thumbs.db
 
+# Retired Quarto output and caches
+.quarto/
+_site/
+_freeze/
 **/*.quarto_ipynb
