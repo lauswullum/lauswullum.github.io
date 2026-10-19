@@ -1,7 +1,7 @@
 * { box-sizing: border-box; }
 html { background: #fff; color: #171717; }
 :root {
-  --background-wash: .75;
+  --background-wash: .55;
   --background-painting: url("assets/images/jens-juel-landskab-ved-oresund.webp");
 }
 body { margin: 0; isolation: isolate; }
@@ -19,9 +19,12 @@ body::before {
       rgba(255, 255, 255, var(--background-wash))
     ),
     var(--background-painting);
-  background-position: center;
+  background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
+  filter: sepia(.1);
+  transform: scale(1.1);
+  transform-origin: top center;
 }
 a { color: #0000bb; text-decoration: underline; text-underline-offset: 2px; }
 a:visited { color: #551a8b; }
