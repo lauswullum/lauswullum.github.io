@@ -23,7 +23,7 @@ body::before {
   background-size: cover;
   background-repeat: no-repeat;
   filter: sepia(.1);
-  transform: scale(1.1);
+  transform: scale(1.0);
   transform-origin: top center;
 }
 a { color: #0000bb; text-decoration: underline; text-underline-offset: 2px; }
