@@ -30,9 +30,6 @@
       const active = station === selected;
       station.button.textContent = active ? `❚❚ Pause ${station.name}` : `▶ Play ${station.name}`;
       station.button.setAttribute('aria-pressed', String(active));
-      if (active && suspended) {
-        station.status.textContent = `Paused — resumes at ${scheduledResume()} (Danish time). Press pause to cancel.`;
-      }
     }
   }
 
@@ -56,7 +53,7 @@
 
   async function start(station) {
     const attempt = ++station.attempt;
-    station.status.textContent = 'Connecting…';
+    station.status.textContent = '';
     station.radio.src = station.source;
     station.radio.load();
     try {
@@ -97,9 +94,6 @@
       // Recheck the clock when playback begins, including after buffering.
       checkSchedule();
       if (selected === station && !suspended) station.status.textContent = '';
-    });
-    station.radio.addEventListener('waiting', () => {
-      if (selected === station && !suspended) station.status.textContent = 'Connecting…';
     });
     station.radio.addEventListener('error', () => showError(station));
     // Native controls remain available without JavaScript; scheduling needs JavaScript.
