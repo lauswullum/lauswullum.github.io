@@ -58,6 +58,8 @@ h1 { font-size: 1.9em; letter-spacing: -.05em; margin: 0 0 1em; }
 h2 { font-size: 1em; text-transform: uppercase; letter-spacing: .1em; border-bottom: 1px solid #ccc; padding-bottom: .25em; }
 .intro { display: flow-root; margin-bottom: 2rem; }
 footer { margin-top: 2rem; }
+.moon-phase { white-space: nowrap; }
+#sun-times, #week-number, #temperature { white-space: nowrap; }
 /* Give narrow screens one readable column and comfortable touch targets. */
 @media (max-width: 760px) {
   :root {

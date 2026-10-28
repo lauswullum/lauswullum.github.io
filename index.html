@@ -38,6 +38,97 @@
 <li>Emil Rugaard Wieser — <a href="https://people.mpi-sws.org/~ewieser/">people.mpi-sws.org/~ewieser</a></li>
 </ul></section>
 </main>
-<footer>Laus Wullum · <a href="index.html#contact">Contact</a></footer>
+<footer>Laus Wullum · <a href="index.html#contact">Contact</a> · <span class="moon-phase" title="Copenhagen moon phase unavailable · Data by SunriseSunset.io"><span id="moon" role="img" aria-label="Copenhagen moon phase unavailable">🌙︎</span><span id="moon-illumination"></span></span><span id="sun-times" hidden></span><span id="week-number" hidden></span><span id="temperature" hidden> · <span id="temperature-value"></span></span></footer>
+<script>
+(() => {
+  const moon = document.getElementById("moon");
+  const moonIllumination = document.getElementById("moon-illumination");
+  const sunTimes = document.getElementById("sun-times");
+  const weekNumber = document.getElementById("week-number");
+
+  // ISO weeks begin on Monday; use Copenhagen's date regardless of visitor location.
+  const dateParts = new Intl.DateTimeFormat("en", {
+    timeZone: "Europe/Copenhagen", year: "numeric", month: "numeric", day: "numeric"
+  }).formatToParts(new Date());
+  const part = type => Number(dateParts.find(item => item.type === type).value);
+  const thursday = new Date(Date.UTC(part("year"), part("month") - 1, part("day")));
+  thursday.setUTCDate(thursday.getUTCDate() + 4 - (thursday.getUTCDay() || 7));
+  const yearStart = new Date(Date.UTC(thursday.getUTCFullYear(), 0, 1));
+  const week = Math.ceil(((thursday - yearStart) / 86400000 + 1) / 7);
+  weekNumber.textContent = ` · Week ${week}`;
+  weekNumber.title = "ISO week number · Copenhagen local date";
+  weekNumber.hidden = false;
+  const phases = [
+    "New Moon", "Waxing Crescent", "First Quarter", "Waxing Gibbous",
+    "Full Moon", "Waning Gibbous", "Last Quarter", "Waning Crescent"
+  ];
+  const icons = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"];
+
+  fetch("https://api.sunrisesunset.io/json?lat=55.6761&lng=12.5683&timezone=Europe%2FCopenhagen&time_format=24")
+    .then(response => {
+      if (!response.ok) throw new Error("Sun and moon request failed");
+      return response.json();
+    })
+    .then(data => {
+      if (data.status !== "OK" || !data.results) return;
+
+      // The API returns local 24-hour times; omit seconds for the footer.
+      const sunrise = data.results.sunrise?.match(/^\d{2}:\d{2}/)?.[0];
+      const sunset = data.results.sunset?.match(/^\d{2}:\d{2}/)?.[0];
+      if (sunrise && sunset) {
+        const length = data.results.day_length?.match(/^(\d+):(\d{2}):\d{2}$/);
+        const dayLength = length ? `${Number(length[1])}h ${Number(length[2])}m` : "";
+        sunTimes.textContent = ` · ${sunrise} - ${sunset}${dayLength ? ` (${dayLength})` : ""}`;
+        sunTimes.title = `Sunrise ${sunrise}, sunset ${sunset}${dayLength ? ` · Day length ${dayLength}` : ""} · Copenhagen local time · Data by SunriseSunset.io`;
+        sunTimes.setAttribute("aria-label", sunTimes.title);
+        sunTimes.hidden = false;
+      }
+
+      const phase = data.results?.moon_phase;
+      const index = phases.indexOf(phase);
+      if (index === -1) return;
+
+      moon.textContent = icons[index] + "\uFE0E";
+      moon.setAttribute("aria-label", `Moon phase in Copenhagen: ${phase}`);
+      moon.parentElement.title = `Moon phase in Copenhagen: ${phase} · Data by SunriseSunset.io`;
+      const illumination = data.results.moon_illumination;
+      if (Number.isFinite(illumination) && illumination >= 0 && illumination <= 100) {
+        moonIllumination.textContent = ` ${Math.round(illumination)}%`;
+        moonIllumination.title = `Moon illumination: ${Math.round(illumination)}%`;
+        moon.parentElement.title += ` · ${Math.round(illumination)}% illuminated`;
+      }
+    })
+    .catch(() => {
+      // Keep the neutral crescent and omit sun times if the service is unavailable.
+    });
+
+  // DMI station 06180 is Copenhagen Airport; request its latest air temperature.
+  fetch("https://opendataapi.dmi.dk/v2/metObs/collections/observation/items?stationId=06180&parameterId=temp_dry&period=latest&limit=1")
+    .then(response => {
+      if (!response.ok) throw new Error("DMI temperature request failed");
+      return response.json();
+    })
+    .then(data => {
+      const observation = data.features?.[0]?.properties;
+      if (!Number.isFinite(observation?.value)) return;
+      const observed = new Date(observation.observed);
+      const age = Date.now() - observed.getTime();
+      // Omit missing or stale measurements rather than presenting them as current.
+      if (!Number.isFinite(age) || age < -300000 || age > 2 * 60 * 60 * 1000) return;
+
+      const time = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/Copenhagen", dateStyle: "medium", timeStyle: "short"
+      }).format(observed);
+      const temperature = document.getElementById("temperature-value");
+      temperature.textContent = `${Math.round(observation.value)}°C`;
+      temperature.title = `Copenhagen Airport: ${observation.value}°C · Observed ${time} (Copenhagen local time) · Source: DMI`;
+      temperature.setAttribute("aria-label", temperature.title);
+      document.getElementById("temperature").hidden = false;
+    })
+    .catch(() => {
+      // Leave the temperature hidden if DMI is unavailable.
+    });
+})();
+</script>
 </body>
 </html>
