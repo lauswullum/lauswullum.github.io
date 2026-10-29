@@ -118,7 +118,7 @@ python3 -m unittest discover -s tests -v
 
 ## Painting background
 
-The entire site uses Jens Juel's *Landskab ved Øresund*. The supplied JPEG is retained in `assets/images/jens-juel-landskab-ved-oresund.jpg`, and the original Downloads file is untouched. The browser loads compressed WebP copies: `jens-juel-landskab-ved-oresund.webp` on desktop (about 403 KB) and `jens-juel-landskab-ved-oresund-mobile.webp` on screens 760px or narrower (about 46 KB). The original 3.9 MB JPEG is not downloaded by the pages.
+The entire site uses L.A. Ring's *En rugmark ved landsbyen Ring* (1887), sourced from `Downloads/walls`. The browser loads compressed WebP copies: `la-ring-en-rugmark-ved-landsbyen-ring.webp` on desktop and `la-ring-en-rugmark-ved-landsbyen-ring-mobile.webp` on screens 760px or narrower. The original Downloads file is untouched. The previous Jens Juel background assets remain in `assets/images/`.
 
 `styles.css` places the painting in a fixed, full-viewport decorative layer behind the content, with a white overlay. The image is cropped to cover the screen without stretching, including on mobile. It is omitted when printing.
 
