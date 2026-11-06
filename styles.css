@@ -2,7 +2,7 @@
 html { background: #fff; color: #171717; }
 :root {
   --background-wash: .45;
-  --background-painting: url("assets/images/la-ring-en-rugmark-ved-landsbyen-ring.webp");
+  --background-painting: url("assets/images/jens-juel-landskab-ved-oresund.webp");
 }
 body { margin: 0; isolation: isolate; }
 /* A fixed decorative layer covers the viewport on short and long pages alike.
@@ -65,7 +65,7 @@ footer { margin-top: 2rem; }
 /* Give narrow screens one readable column and comfortable touch targets. */
 @media (max-width: 760px) {
   :root {
-    --background-painting: url("assets/images/la-ring-en-rugmark-ved-landsbyen-ring-mobile.webp");
+    --background-painting: url("assets/images/jens-juel-landskab-ved-oresund-mobile.webp");
   }
   body {
     display: block;
